@@ -1220,7 +1220,15 @@ workingSet
 .. data:: serverStatus.workingSet.overSeconds
 
    :data:`~serverStatus.workingSet.overSeconds` returns the amount of
-   time
+   time between the present and the time that the first page counted
+   in :data:`~serverStatus.workingSet.pagesInMemory`.
+
+   If :data:`~serverStatus.workingSet.pagesInMemory` equals physical
+   RAM *and* :data:`~serverStatus.workingSet.overSeconds` is very
+   small, the working set may be much larger than physical RAM;
+   conversely, when :data:`~serverStatus.workingSet.overSeconds`
+   indicates a low amount of "page churn" and a working set that
+   likely fits in physical RAM.
 
 .. _server-status-metrics:
 
