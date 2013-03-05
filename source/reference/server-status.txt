@@ -314,11 +314,6 @@ globalLock
    operations have held :data:`~serverStatus.globalLock` infrequently for longer periods of
    time.
 
-.. _globallock-currentqueue:
-
-globalLock.currentQueue
-~~~~~~~~~~~~~~~~~~~~~~~
-
 .. data:: serverStatus.globalLock.currentQueue
 
    The :data:`~serverStatus.globalLock.currentQueue` data structure value provides more
@@ -359,8 +354,8 @@ globalLock.activeClients
    granular information about the number of connected clients and the
    operation types (e.g. read or write) performed by these clients.
 
-   Use this data to provide context for the :ref:`currentQueue
-   <globallock-currentqueue>` data.
+   Use this data to provide context for the
+   :data:`~serverStatus.globalLock.currentQueue` data.
 
 .. data:: serverStatus.globalLock.activeClients.total
 
@@ -982,13 +977,10 @@ writeBacksQueued
 .. _journaling-status:
 .. _server-status-journaling:
 
-dur
----
+Journaling (dur)
+----------------
 
 .. versionadded:: 1.8
-
-Journaling
-~~~~~~~~~~
 
 .. example:: :ref:`output of the journaling fields <server-status-example-journaling>`.
 
@@ -1011,8 +1003,6 @@ Journaling
       option.
 
    .. seealso:: ":doc:`/administration/journaling`" for more information about journaling operations.
-
-.. STUB :doc:`/core/journaling`
 
 .. data:: serverStatus.dur.commits
 
@@ -1165,3 +1155,278 @@ recordStats
    :data:`~serverStatus.recordStats.<database>.pageFaultExceptionsThrown` reflects the
    number of page fault exceptions thrown by :program:`mongod` when
    accessing data for the ``<database>`` database.
+
+.. _server-status-workingset:
+.. _server-status-working-set:
+
+workingSet
+----------
+
+.. versionadded:: 2.4
+
+.. example:: :ref:`output of the workingSet <server-status-example-workingset>` fields.
+
+.. note::
+
+   The :data:`~serverStatus.workingSet` data is only included in the
+   output of :dbcommand:`serverStatus` *if* explicitly enabled. To
+   return the :data:`~serverStatus.workingSet` use one of the
+   following commands:
+
+   .. code-block:: javascript
+
+      db.serverStatus( { workingSet: 1 } )
+      db.runCommand( { serverStatus: 1, workingSet: 1 } )
+
+.. data:: serverStatus.workingSet
+
+   :data:`~serverStatus.workingSet` is a document that contains values
+   useful in predicting working set, or the amount of data that
+   MongoDB is uses actively.
+
+.. data:: serverStatus.workingSet.note
+
+   :data:`~serverStatus.workingSet.note` is a field that holds a
+   string warning that the :data:`~serverStatus.workingSet`
+   document is an estimate.
+
+.. data:: serverStatus.workingSet.pagesInMemory
+
+   :data:`~serverStatus.workingSet.pagesInMemory` contains a count of
+   the total number of pages in the system's RAM. On Linux systems,
+   the default page size if 4 kilobytes.
+
+   If your total working set is less than the size of physical memory,
+   over time the value of
+   :data:`~serverStatus.workingSet.pagesInMemory` will equal your data
+   size. Conversely, if your data set is greater than the size of the
+   physical RAM, this number will reflect the total size of physical
+   RAM.
+
+   Use :data:`~serverStatus.workingSet.pagesInMemory` in conjunction
+   with :data:`~serverStatus.workingSet.overSeconds` to help estimate
+   the actual size of the working set.
+
+.. data:: serverStatus.workingSet.computationTimeMicros
+
+   :data:`~serverStatus.workingSet.computationTimeMicros` reports the
+   amount of time the :program:`mongod` used to calculate the
+   :data:`~serverStatus.workingSet` statistics. Because, reporting on
+   :data:`~serverStatus.workingSet` may impact the performance of
+   other operations on the :program:`mongod` instance, ensure that
+   automated monitoring tools use this value when determining the
+   collection frequency for :data:`~serverStatus.workingSet`.
+
+.. data:: serverStatus.workingSet.overSeconds
+
+   :data:`~serverStatus.workingSet.overSeconds` returns the amount of
+   time
+
+.. _server-status-metrics:
+
+metrics
+-------
+
+.. example:: :ref:`output of the metrics <server-status-example-metrics>` fields.
+
+.. versionadded:: 2.4
+
+.. data:: serverStatus.metrics
+
+   :data:`~serverStatus.metrics` is a document of
+
+.. data:: serverStatus.metrics.document
+
+   :data:`~serverStatus.metrics.document`
+
+.. data:: serverStatus.metrics.document.deleted
+
+   :data:`~serverStatus.metrics.document.related`
+
+.. data:: serverStatus.metrics.document.inserted
+
+   :data:`~serverStatus.metrics.document.inserted`
+
+.. data:: serverStatus.metrics.document.returned
+
+   :data:`~serverStatus.metrics.document.returned`
+
+.. data:: serverStatus.metrics.document.scanned
+
+   :data:`~serverStatus.metrics.document.scanned`
+
+.. data:: serverStatus.metrics.document.updated
+
+   :data:`~serverStatus.metrics.document.updated`
+
+.. data:: serverStatus.metrics.getLastError
+
+   :data:`~serverStatus.metrics.getLastError`
+
+.. data:: serverStatus.metrics.getLastError.wtime
+
+   :data:`~serverStatus.metrics.getLastError.wtime`
+
+.. data:: serverStatus.metrics.getLastError.wtime.num
+
+   :data:`~serverStatus.metrics.getLastError.wtime.num`
+
+.. data:: serverStatus.metrics.getLastError.wtime.totalMillis
+
+   :data:`~serverStatus.metrics.getLastError.wtime.totalMillis`
+
+.. data:: serverStatus.metrics.getLastError.wtimeouts
+
+   :data:`~serverStatus.metrics.getLastError.wtimeouts`
+
+.. data:: serverStatus.metrics.operation
+
+   :data:`~serverStatus.metrics.operation`
+
+.. data:: serverStatus.metrics.operation.fastmod
+
+   :data:`~serverStatus.metrics.operation.fastmod`
+
+.. data:: serverStatus.metrics.operation.idhack
+
+   :data:`~serverStatus.metrics.operation.idhack`
+
+.. data:: serverStatus.metrics.operation.scanAndOrder
+
+   :data:`~serverStatus.metrics.operation.scanAndOrder`
+
+.. data:: serverStatus.metrics.record
+
+   :data:`~serverStatus.metrics.record`
+
+.. data:: serverStatus.metrics.record.moves
+
+   :data:`~serverStatus.metrics.record`
+
+.. data:: serverStatus.metrics.repl
+
+   :data:`~serverStatus.metrics.repl`
+
+.. data:: serverStatus.metrics.repl.apply
+
+   :data:`~serverStatus.metrics.repl.apply`
+
+.. data:: serverStatus.metrics.repl.apply.batches
+
+   :data:`~serverStatus.metrics.repl.apply.batches`
+
+.. data:: serverStatus.metrics.repl.apply.batches.num
+
+   :data:`~serverStatus.metrics.repl.apply.batches.num`
+
+.. data:: serverStatus.metrics.repl.apply.batches.totalMills
+
+   :data:`~serverStatus.metrics.repl.apply.batches.totalMills`
+
+.. data:: serverStatus.metrics.repl.apply.ops
+
+   :data:`~serverStatus.metrics.repl.apply.ops`
+
+.. data:: serverStatus.metrics.repl.buffer
+
+   :data:`~serverStatus.metrics.repl.buffer`
+
+.. data:: serverStatus.metrics.repl.buffer.count
+
+   :data:`~serverStatus.metrics.repl.buffer.count`
+
+.. data:: serverStatus.metrics.repl.buffer.maxSizeBytes
+
+   :data:`~serverStatus.metrics.repl.buffer.maxSizeBytes`
+
+.. data:: serverStatus.metrics.repl.buffer.sizeBytes
+
+   :data:`~serverStatus.metrics.repl.sizeBytes`
+
+.. data:: serverStatus.metrics.repl.network
+
+   :data:`~serverStatus.metrics.repl.network`
+
+.. data:: serverStatus.metrics.repl.network.bytes
+
+   :data:`~serverStatus.metrics.repl.network.bytes`
+
+.. data:: serverStatus.metrics.repl.network.getmores
+
+   :data:`~serverStatus.metrics.repl.network.getmores`
+
+.. data:: serverStatus.metrics.repl.network.getmores.num
+
+   :data:`~serverStatus.metrics.repl.network.getmores.num`
+
+.. data:: serverStatus.metrics.repl.network.getmores.totalMillis
+
+   :data:`~serverStatus.metrics.repl.network.getmores.totalMillis`
+
+.. data:: serverStatus.metrics.repl.network.ops
+
+   :data:`~serverStatus.metrics.repl.network.ops`
+
+.. data:: serverStatus.metrics.repl.network.readersCreated
+
+   :data:`~serverStatus.metrics.repl.network.readersCreated`
+
+.. data:: serverStatus.metrics.repl.oplog
+
+   :data:`~serverStatus.metrics.repl.oplog`
+
+.. data:: serverStatus.metrics.repl.oplog.insert
+
+   :data:`~serverStatus.metrics.repl.oplog.insert`
+
+.. data:: serverStatus.metrics.repl.oplog.num
+
+   :data:`~serverStatus.metrics.repl.oplog.num`
+
+.. data:: serverStatus.metrics.repl.uplog.totalMillis
+
+   :data:`~serverStatus.metrics.repl.oplog.totalMillis`
+
+.. data:: serverStatus.metrics.repl.insertBytes
+
+   :data:`~serverStatus.metrics.repl.insertBytes`
+
+.. data:: serverStatus.metrics.repl.preload
+
+   :data:`~serverStatus.metrics.repl.preload`
+
+.. data:: serverStatus.metrics.repl.preload.docs
+
+   :data:`~serverStatus.metrics.repl.preload.docs`
+
+.. data:: serverStatus.metrics.repl.preload.docs.num
+
+   :data:`~serverStatus.metrics.repl.preload.docs.num`
+
+.. data:: serverStatus.metrics.repl.preload.docs.totalMillis
+
+   :data:`~serverStatus.metrics.repl.preload.docs.totalMillis`
+
+.. data:: serverStatus.metrics.repl.preload.indexes
+
+   :data:`~serverStatus.metrics.repl.preload.indexes`
+
+.. data:: serverStatus.metrics.repl.preload.indexes.num
+
+   :data:`~serverStatus.metrics.repl.preload.indexes.num`
+
+.. data:: serverStatus.metrics.repl.preload.indexes.totalMillis
+
+   :data:`~serverStatus.metrics.repl.preload.indexes.totalMillis`
+
+.. data:: serverStatus.metrics.ttl
+
+   :data:`~serverStatus.metrics.ttl`
+
+.. data:: serverStatus.metrics.ttl.deletedDocuments
+
+   :data:`~serverStatus.metrics.ttl.deletedDocuments`
+
+.. data:: serverStatus.metrics.ttl.passes
+
+   :data:`~serverStatus.metrics.ttl.passes`
