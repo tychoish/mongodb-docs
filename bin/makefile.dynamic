@@ -2,9 +2,17 @@
 # targets, LaTeX/PDFs, tables, the installation guides, and sym links.
 
 .PHONY: $(output)/makefile.meta
+.PHONY: $(output)/makefile.sphinx-migration
+.PHONY: $(output)/makefile.source
+.PHONY: $(output)/makefile.sphinx
+.PHONY: $(output)/makefile.tables
+.PHONY: $(output)/makefile.releases 
+.PHONY: $(output)/makefile.manpages
 
 -include $(output)/makefile.meta
 -include $(output)/makefile.source
+-include $(output)/makefile.manpages
+-include $(output)/makefile.tables
 -include $(output)/makefile.pdfs
 -include $(output)/makefile.texinfo
 -include $(output)/makefile.links
@@ -19,7 +27,18 @@ $(output)/makefile.%:bin/makefile-builder/%.py bin/makefile_builder.py $(output)
 	@$(PYTHONBIN) $< $@
 $(output)/makefile.intersphinx:bin/makefile-builder/intersphinx.py bin/makefile_builder.py $(output) conf.py
 	@$(PYTHONBIN) $< $@
+
+$(output)/makefile.manpages:bin/makefile-builder/manpages.py bin/makefile_builder.py $(output) bin/mongodb_docs_meta.py
+	@$(PYTHONBIN) $< $@
 $(output)/makefile.meta:bin/makefile-builder/meta.py bin/makefile_builder.py $(output) bin/mongodb_docs_meta.py
 	@$(PYTHONBIN) $< $@
+$(output)/makefile.sphinx-migration:bin/makefile-builder/sphinx-migration.py bin/makefile_builder.py bin/builder_data.py $(output) bin/mongodb_docs_meta.py
+	@$(PYTHONBIN) $< $@
 $(output)/makefile.source:bin/makefile-builder/source.py bin/makefile_builder.py $(output)
+	@$(PYTHONBIN) $< $@
+$(output)/makefile.sphinx:bin/makefile-builder/sphinx.py bin/makefile_builder.py $(output) bin/mongodb_docs_meta.py
+	@$(PYTHONBIN) $< $@
+$(output)/makefile.tables:bin/makefile-builder/tables.py bin/makefile_builder.py $(output)
+	@$(PYTHONBIN) $< $@
+$(output)/makefile.releases:bin/makefile-builder/releases.py bin/makefile_builder.py $(output) bin/mongodb_docs_meta.py bin/builder_data.py
 	@$(PYTHONBIN) $< $@

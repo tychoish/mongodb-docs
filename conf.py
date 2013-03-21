@@ -9,11 +9,10 @@ import sys
 import os.path
 import yaml
 
-sys.path.append(os.path.abspath("/home/tychoish/xgen/mongodb-docs/bin/"))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'bin')))
 
 with open('meta.yaml', 'r') as f:
     meta = yaml.load_all(f).next()
-
 
 # -- General configuration ----------------------------------------------------
 
@@ -60,16 +59,6 @@ extlinks = {
     'meta-driver': ('http://docs.mongodb.org/meta-driver/latest%s', ''),
     'about': ('http://www.mongodb.org/about%s', '')
 }
-
-composite_pages = [
-    'commands', 
-    'javascript',
-    'operators', 
-    'aggregation', 
-    'meta-query-operators', 
-    'replica-commands', 
-    'sharding-commands'
-]
 
 intersphinx_mapping = {
         # path's are to the inv file relative to ``build/{branch}/source``.

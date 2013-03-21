@@ -1,4 +1,4 @@
-.PHONY: help clean clean-branch clean-public publish publish-if-up-to-date setup 
+.PHONY: help clean clean-branch clean-public setup 
 .PHONY: source/about.txt source/includes/hash.rst $(public-branch-output)/release.txt 
 .PHONY: meta.yaml bin/meta.yaml $(branch-output)/meta.yaml
 

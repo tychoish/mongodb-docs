@@ -100,8 +100,8 @@ sphinx = [
     'doctest',
     'linkcheck',
     'texinfo',
-    'draft-html',
-    'draft-latex',
+    # 'draft-html',
+    # 'draft-latex',
 ]
 
 install_guides = [
@@ -112,9 +112,9 @@ install_guides = [
 #        source file.
 #
 #   (target, dep),
-    ('source/tutorial/install-mongodb-on-linux.txt', 'source/includes/install-curl-release-linux-64.rst source/includes/install-curl-release-linux-32.rst'),
-    ('source/tutorial/install-mongodb-on-os-x.txt', 'source/includes/install-curl-release-osx-64.rst'),
-    ('source/tutorial/install-mongodb-enterprise.txt', 'source/includes/install-curl-release-ent-amz.rst source/includes/install-curl-release-ent-rhel6.rst source/includes/install-curl-release-ent-ubuntu11.rst source/includes/install-curl-release-ent-ubuntu12.rst source/includes/install-curl-release-ent-suse.rst'),
+    ('tutorial/install-mongodb-on-linux.txt', ['includes/install-curl-release-linux-64.rst', 'includes/install-curl-release-linux-32.rst']),
+    ('tutorial/install-mongodb-on-os-x.txt', ['includes/install-curl-release-osx-64.rst']),
+    ('tutorial/install-mongodb-enterprise.txt', ['includes/install-curl-release-ent-amz.rst', 'includes/install-curl-release-ent-rhel6.rst', 'includes/install-curl-release-ent-ubuntu11.rst', 'includes/install-curl-release-ent-ubuntu12.rst', 'includes/install-curl-release-ent-suse.rst']),
     ('linux-64', None),
     ('linux-32', None),
     ('osx-64', None),
@@ -160,7 +160,6 @@ sphinx_migrations = [
 #        acceptable.
 #
 #   (target, dependency),
-    ('source/about.txt', None),
     ('$(branch-output)/dirhtml', 'dirhtml'),
     ('$(branch-output)/html', 'html'),
     ('$(branch-output)/singlehtml', 'singlehtml')

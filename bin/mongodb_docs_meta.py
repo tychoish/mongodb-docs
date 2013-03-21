@@ -7,9 +7,16 @@ import argparse
 import yaml
 
 MANUAL_BRANCH = 'master'
+PUBLISHED_BRANCHES = [ 'v2.2', 'master' ]
 PUBLISHED_VERSIONS = [ '2.4', '2.2' ]
 STABLE_RELEASE = PUBLISHED_VERSIONS[0]
 UPCOMING_RELEASE = None
+
+def get_build_envs():
+    s = (['build/' + branch + '/branch-source/' for branch in PUBLISHED_BRANCHES ] +
+         ['build/' + branch + '/branch-source-current/' for branch in PUBLISHED_BRANCHES ])
+    s.append('build/' + branch + '/source/')
+    return s
 
 def shell_value( args ):
     if isinstance( args , str ):

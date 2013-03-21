@@ -1,10 +1,13 @@
-.PHONY: publish-if-up-to-date stage-if-up-to-date _build-check
+.PHONY: publish-if-up-to-date stage-if-up-to-date _build-check publish 
 
 _build-check:
 	@bin/published-build-check publish $(current-branch) $(last-commit)
 
 publish-if-up-to-date:_build-check publish
 stage-if-up-to-date:_build-check publish
+
+publish:$(sphinx-content) $(static-content)
+	@echo [build]: $(current-branch) branch is succeessfully deployed to '$(public-output)'.
 
 # These instructions *only* control the process for uploading the
 # manual to the web servers. Everything else is in one of the

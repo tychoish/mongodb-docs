@@ -659,7 +659,7 @@ the :program:`mongo` shell:
                                           "ssd" : 1
                                },
                                "MultipleDC" : {
-                                       "dc.va" : 1,
+                                      "dc.va" : 1,
                                       "dc.gto" : 1
                                }
                        }

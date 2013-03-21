@@ -14,3 +14,4 @@ source/includes/manpage-options-auth-mongo.rst
 source/includes/manpage-options-ssl-settings.rst
 TAGS
 meta.yaml
+composite-pages.yaml

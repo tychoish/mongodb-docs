@@ -17,6 +17,7 @@ def generate_meta():
     m.var('public-output', '$(output)/public', block='paths')
     m.var('branch-output', '$(output)/$(current-branch)', block='paths')
     m.var('branch-source', '$(branch-output)/branch-source')
+    m.var('branch-source-current', '$(branch-source)-current')
     m.var('public-branch-output', '$(public-output)/$(current-branch)', block='paths')
 
 def main():

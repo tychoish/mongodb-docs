@@ -14,21 +14,10 @@ $(branch-output)/manpages.tar.gz:man
 	@$(TARBIN) -C $(branch-output)/ --transform=s/man/mongodb-manpages/ \
 		   -czvf $@ $(subst $(branch-output)/,,$(manpages)) >> $@.log
 	@echo [man]: created $@ archive of all manpages
-
-$(rst-include)/manpage-options-auth-mongo.rst:$(rst-include)/manpage-options-auth.rst
-	@cp $< $@
-	@sed $(SED_ARGS_FILE) -e 's/fact-authentication-source-tool/fact-authentication-source-mongo/' $@
-	@-git update-index --assume-unchanged
-	@echo "[generator]: generated the '$@' file."
-manpage-auto += $(rst-include)/manpage-options-auth-mongo.rst
-
-$(rst-include)/manpage-options-ssl-settings.rst:$(rst-include)/manpage-options-ssl.rst
-	@cp $< $@
-	@sed $(SED_ARGS_FILE) -e 's/\.\. option:: --/.. setting:: /' \
-			      -e 's/setting:: (.*) .*/setting:: \1/' \
-			      -e 's/:option:`--/:setting:`/g' $@
-	@echo "[generator]: generated the '$@' file."
-manpage-auto += $(rst-include)/manpage-options-ssl-settings.rst
+.PHONY:$(manpages) 
 
 generate-manpages:$(manpage-auto)
-.PHONY:$(manpages) $(manpage-auto) generate-manpages
+generate-manpages-current:$(manpage-auto-current)
+generate-manpages-master:$(manpage-auto-master)
+generate-manpages-v2.2:$(manpage-auto-v2.2)
+.PHONY:$(manpage-auto) generate-manpages

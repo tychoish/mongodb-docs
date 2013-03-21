@@ -20,22 +20,20 @@ include bin/makefile.compatibility
 include bin/makefile.dynamic
 include bin/makefile.clean
 include bin/makefile.content
-include bin/makefile.tables
 include bin/makefile.push
 include bin/makefile.manpages
 
-############# Meta targets that control the build and publication process. #############
-publish:$(sphinx-content) $(static-content)
-	@echo [build]: $(current-branch) branch is succeessfully deployed to '$(public-output)'.
-
 ############# Targets that define the production build process #############
 # Generating files with build specific info.
-setup:source/includes/hash.rst meta.yaml bin/meta.yaml
+setup:source/includes/hash.rst meta.yaml bin/meta.yaml composite-pages.yaml $(branch-output)/composite-pages.yaml
 	@mkdir -p $(public-branch-output) $(public-output) $(branch-output)
 	@echo [build]: created $(public-branch-output)
-meta.yaml bin/meta.yaml $(branch-output)/meta.yaml:
+meta.yaml $(branch-output)/meta.yaml:
 	@bin/mongodb_docs_meta.py yaml $@
 	@echo [meta]: regenerated $@
+composite-pages.yaml $(branch-output)/composite-pages.yaml:bin/composite-pages.yaml
+	@cp $< $@
+	@echo [meta]: compsite pages $@
 source/includes/hash.rst:source/about.txt
 	@$(PYTHONBIN) bin/update_hash.py
 	@-git update-index --assume-unchanged $@
@@ -98,5 +96,3 @@ $(branch-output)/latex/%.tex:
 tags:
 	@etags -I --language=none --regex=@bin/etags.regexp `find source -name "*.txt" | grep -v "\.#"`
 	@echo "[dev]: etags generation complete."
-draft:draft-html
-draft-pdfs:draft-latex $(subst .tex,.pdf,$(wildcard $(branch-output)/draft-latex/*.tex))
