@@ -17,7 +17,9 @@ def is_current_branch(env):
         return False
 
 def is_current_build(env):
-    if env.split('/')[2] == 'branch-source-current':
+    if env == 'source/':
+        return True
+    elif env.split('/')[2] == 'branch-source-current':
         return True
     else:
         return False
@@ -26,16 +28,19 @@ def build_all_install_guides(install_guides):
     m.comment('to render the install guides properly, we have to bake in the version number.', block='header')
     m.newline(block='header')
 
+    build_envs = get_build_envs()
+    build_envs.append('source/')
+
     for build in install_guides:
         if build[1] is None:
-            for env in get_build_envs():
-                target = env + 'includes/install-curl-release-' + build[0] + '.rst '
+            for env in build_envs:
+                target = env + 'includes/install-curl-release-' + build[0] + '.rst'
                 if is_current_build(env) and not is_current_branch(env):
                     pass
                 else:
                     makefile_core(target, build[0], env)
         else:
-            for env in get_build_envs():
+            for env in build_envs:
                 target = env + build[0]
                 dependency = ''
                 for dep in build[1]: 
@@ -121,7 +126,7 @@ def makefile_enterprise(target, builder, release, env):
                      value=target,
                      block='source')
 
-    m.target(target=target, dependency=env, block='ent')
+    m.target(target=target, dependency=None, block='ent')
     m.job('$(PYTHONBIN) bin/update_release.py %s %s $@' % (builder, release), block='ent')
     m.msg('[build]: \(re\)generated $@.', block='ent')
     m.newline(block='ent')
@@ -130,7 +135,6 @@ def makefile_restat(target, dependency, env):
     # this is an installation guide.
     branch = env_to_branch(env)
 
-    dependency += ' ' + env
     if is_current_build(env) and is_current_branch(env):
         m.append_var(variable='installation-guides-current', value=target, block='guide')
 

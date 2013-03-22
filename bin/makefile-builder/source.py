@@ -14,11 +14,10 @@ def generate_cache(branch, branch_output, branch_source, branch_source_current):
     if branch == '$(current-branch)': 
         m.section_break(abs_branch + ' branch (current) sphinx prerequisites')
         m.var('generated-content-current', 'tables-current generate-manpages-current installation-guides-current')
-        m.target('$(generated-content-current)', branch_source_current)
         m.newline()
         m.target('generated-content-current', '$(generated-content-current)')
         m.target(target='kickoff-current', 
-                 dependency=branch_source_current + ' generated-content-current', 
+                 dependency=branch_source_current, 
                  block='depchain')
         m.target('sphinx-prerequisites-current', 'kickoff-current')
         m.newline()
@@ -50,6 +49,7 @@ def generate_cache(branch, branch_output, branch_source, branch_source_current):
              dependency=get_deps_list('$(branch-output)'),
              block='prereq')
     m.job('rsync --ignore-times --recursive --times --delete source/ $@', block='prereq')
+    m.job('$(MAKE) generated-content-current')
     m.msg('[sphinx-prep]: YEAHHHHH created and synced $@', block='prereq')
 
     m.target(target=branch_output + '/conf-tmp.py', 
@@ -71,6 +71,8 @@ def generate_cache(branch, branch_output, branch_source, branch_source_current):
     m.msg('[sphinx-prep]: updated cached $@ build file', block='prereq')
 
 def main():
+    branches = PUBLISHED_BRANCHES
+    branches.append(str(get_branch()))
     for branch in PUBLISHED_BRANCHES:
 
         if branch == get_branch():

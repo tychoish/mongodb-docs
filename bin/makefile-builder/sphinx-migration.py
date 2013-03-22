@@ -10,7 +10,10 @@ m = MakefileBuilder()
 def build_all_sphinx_migrations(migrations):
     m.comment('Establish basic dependencies.', block='deps')
 
-    for branch in PUBLISHED_BRANCHES:
+    branches = PUBLISHED_BRANCHES
+    branches.append(str(get_branch()))
+
+    for branch in branches:
         target_loc = '$(output)/' + branch
         m.target(target_loc + '/singlehtml/contents.html', target_loc + '/singlehtml', block='deps')
         m.target(target_loc + '/epub/mongodb-manual.epub', 'epub', block='deps')
@@ -19,16 +22,15 @@ def build_all_sphinx_migrations(migrations):
     m.comment('targets to establish to ensure clean builds and sphinx content.', block='header')
     m.newline(block='header')
 
-    for migration in migrations:
-        for branch in PUBLISHED_BRANCHES:
-        
-            block='build'
-            
+    block='build'
+
+    for branch in branches:
+        for migration in migrations:
             if False is True:
                 dep = migration[1] + '-' + branch
             else:
                 dep = migration[1]
-            target = '$(output)/' + branch + '/' + migration[1]
+            target = str('$(output)/' + branch + '/' + migration[1])
 
             generate_build_rule(target, dep, block)
 

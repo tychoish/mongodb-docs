@@ -10,7 +10,7 @@ m = MakefileBuilder()
 def generate_man_builder_0(base, branch, includes_dir):
     target = includes_dir + 'manpage-options-auth-mongo.rst'
     m.target(target=target,
-             dependency=includes_dir + 'manpage-options-auth.rst ' + base,
+             dependency=includes_dir + 'manpage-options-auth.rst',
              block=base)
     m.job('cp $< $@', block=base)
     m.job('sed $(SED_ARGS_FILE) -e "s/fact-authentication-source-tool/fact-authentication-source-mongo/" $@', block=base)
@@ -29,18 +29,19 @@ def generate_man_builder_0(base, branch, includes_dir):
 def generate_man_builder_1(base, branch, includes_dir):
     target = includes_dir + 'manpage-options-ssl-settings.rst'
 
-    m.target(target=target,
-             dependency=includes_dir + 'manpage-options-ssl.rst ' + base,
-             block=base)
-    m.job('cp $< $@', block=base)
-    m.job('sed $(SED_ARGS_FILE) -e "s/\.\. option:: \-\-/.. setting:: /" -e "s/setting:: (.*) .*/setting:: \1/" -e "s/:option:\\`\-\-/:setting:\\`/g" $@', block=base)
-    m.msg('[generator]: generated the "$@" file.', block=base)
     m.append_var('manpage-auto', target, block=base )
-
     if is_current_build(base): 
         m.append_var('manpage-auto-current', target, block=base)
     else:
         m.append_var('manpage-auto-' + branch, target, block=base)
+
+    m.target(target=target,
+             dependency=includes_dir + 'manpage-options-ssl.rst',
+             block=base)
+    m.job('cp $< $@', block=base)
+    m.job('sed $(SED_ARGS_FILE) -e "s/\.\. option:: \-\-/.. setting:: /" -e "s/setting:: (.*) .*/setting:: \1/" -e "s/:option:\\`\-\-/:setting:\\`/g" $@', block=base)
+    m.msg('[generator]: generated the "$@" file.', block=base)
+
 
     m.newline(block=base)
 

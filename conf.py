@@ -102,8 +102,8 @@ html_theme_path = ['../../themes']
 html_title = "MongoDB Manual"
 htmlhelp_basename = 'MongoDBdoc'
 
-html_logo = ".static/logo-mongodb.png"
-html_static_path = ['source/.static']
+# html_logo = ".static/logo-mongodb.png"
+# html_static_path = ['source/.static']
 
 html_copy_source = False
 html_use_smartypants = True

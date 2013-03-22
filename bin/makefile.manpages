@@ -16,6 +16,22 @@ $(branch-output)/manpages.tar.gz:man
 	@echo [man]: created $@ archive of all manpages
 .PHONY:$(manpages) 
 
+$(rst-include)/manpage-options-auth-mongo.rst:$(rst-include)/manpage-options-auth.rst
+	@cp $< $@
+	@sed $(SED_ARGS_FILE) -e 's/fact-authentication-source-tool/fact-authentication-source-mongo/' $@
+	@-git update-index --assume-unchanged
+	@echo "[generator]: generated the '$@' file."
+manpage-auto += $(rst-include)/manpage-options-auth-mongo.rst
+manpage-auto-current += $(rst-include)/manpage-options-auth-mongo.rst
+
+$(rst-include)/manpage-options-ssl-settings.rst:$(rst-include)/manpage-options-ssl.rst
+	@cp $< $@
+	@sed $(SED_ARGS_FILE) -e 's/\.\. option:: --/.. setting:: /' \
+			      -e 's/setting:: (.*) .*/setting:: \1/' \
+			      -e 's/:option:`--/:setting:`/g' $@
+	@echo "[generator]: generated the '$@' file."
+manpage-auto-current += $(rst-include)/manpage-options-ssl-settings.rst
+
 generate-manpages:$(manpage-auto)
 generate-manpages-current:$(manpage-auto-current)
 generate-manpages-master:$(manpage-auto-master)

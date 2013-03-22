@@ -25,15 +25,19 @@ include bin/makefile.manpages
 
 ############# Targets that define the production build process #############
 # Generating files with build specific info.
+.PHONY:$(branch-source-current)
 setup:source/includes/hash.rst meta.yaml bin/meta.yaml composite-pages.yaml $(branch-output)/composite-pages.yaml
 	@mkdir -p $(public-branch-output) $(public-output) $(branch-output)
-	@echo [build]: created $(public-branch-output)
+	@echo [build]: created $(public-branch-output), $(public-output), and $(branch-output)
 meta.yaml $(branch-output)/meta.yaml:
 	@bin/mongodb_docs_meta.py yaml $@
 	@echo [meta]: regenerated $@
-composite-pages.yaml $(branch-output)/composite-pages.yaml:bin/composite-pages.yaml
+composite-pages.yaml $(branch-output)/composite-pages.yaml:bin/composite-pages.yaml $(branch-output)
 	@cp $< $@
 	@echo [meta]: compsite pages $@
+$(branch-output):
+	@mkdir -p $@
+	@echo [build]: created $@
 source/includes/hash.rst:source/about.txt
 	@$(PYTHONBIN) bin/update_hash.py
 	@-git update-index --assume-unchanged $@
