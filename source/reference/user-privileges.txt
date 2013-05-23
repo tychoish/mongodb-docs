@@ -55,22 +55,28 @@ Database User Roles
    :method:`~db.collection.find()` and the following :term:`database
    commands <database command>`:
 
-   - :dbcommand:`aggregate`
-   - :dbcommand:`checkShardingIndex`
-   - :dbcommand:`cloneCollectionAsCapped`
-   - :dbcommand:`collStats`
-   - :dbcommand:`count`
-   - :dbcommand:`dataSize`
-   - :dbcommand:`dbHash`
-   - :dbcommand:`dbStats`
-   - :dbcommand:`distinct`
-   - :dbcommand:`filemd5`
-   - :dbcommand:`geoNear`
-   - :dbcommand:`geoSearch`
-   - :dbcommand:`geoWalk`
-   - :dbcommand:`group`
-   - :dbcommand:`mapReduce` (inline output only.)
-   - :dbcommand:`text` (beta feature.)
+   .. hlist::
+      :columns: 3
+
+      - :dbcommand:`aggregate`
+      - :dbcommand:`checkShardingIndex`
+      - :dbcommand:`cloneCollectionAsCapped`
+      - :dbcommand:`collStats`
+      - :dbcommand:`count`
+      - :dbcommand:`dataSize`
+      - :dbcommand:`dbHash`
+      - :dbcommand:`dbStats`
+      - :dbcommand:`distinct`
+      - :dbcommand:`filemd5`
+      - :dbcommand:`geoNear`
+      - :dbcommand:`geoSearch`
+      - :dbcommand:`geoWalk`
+      - :dbcommand:`group`
+      - :dbcommand:`mapReduce` (inline output only.)
+      - :dbcommand:`text` (beta feature.)
+
+   .. [#map-reduce-read-only] :authrole:`read` only permits
+      :dbcommand:`mapReduce` operations running  *inline*
 
 .. authrole:: readWrite
 
@@ -85,16 +91,26 @@ Database User Roles
    Additionally, users with the :authrole:`readWrite` have access to
    the following :term:`database commands <database command>`:
 
-   - :dbcommand:`cloneCollection` (as the target database.)
-   - :dbcommand:`convertToCapped`
-   - :dbcommand:`create` (and to create collections implicitly.)
-   - :method:`~db.collection.drop()`
-   - :dbcommand:`dropIndexes`
-   - :dbcommand:`emptycapped`
-   - :method:`~db.collection.ensureIndex()`
-   - :dbcommand:`findAndModify`
-   - :dbcommand:`mapReduce` (output to a collection.)
-   - :dbcommand:`renameCollection` (within the same database.)
+   .. hlist::
+      :columns: 3
+
+      - :dbcommand:`cloneCollection` [#clone-as-target]_
+      - :dbcommand:`convertToCapped`
+      - :dbcommand:`create` [#create-implicit]_
+      - :method:`~db.collection.drop()`
+      - :dbcommand:`dropIndexes`
+      - :dbcommand:`emptycapped`
+      - :method:`~db.collection.ensureIndex()`
+      - :dbcommand:`findAndModify`
+      - :dbcommand:`mapReduce` (output to a collection.)
+      - :dbcommand:`renameCollection` (within the same database.)
+
+   .. [#clone-as-target] :authrole:`readWrite` on a database permits a
+      user to use a database as the target for a
+      :dbcommand:`cloneCollection` operation.
+   .. [#create-implicit] :authrole:`readWrite` allows users to create
+      collections implicitly.
+   .. [#]
 
 .. _database-admin-roles:
 
@@ -106,22 +122,28 @@ Database Administration Roles
    Provides the ability to perform the following set of administrative
    operations within the scope of this logical database.
 
-   - :dbcommand:`clean`
-   - :dbcommand:`collMod`
-   - :dbcommand:`collStats`
-   - :dbcommand:`compact`
-   - :dbcommand:`convertToCapped`
-   - :dbcommand:`create`
-   - :method:`db.createCollection()`
-   - :dbcommand:`dbStats`
-   - :method:`~db.collection.drop()`
-   - :dbcommand:`dropIndexes`
-   - :method:`~db.collection.ensureIndex()`
-   - :dbcommand:`indexStats`
-   - :dbcommand:`profile`
-   - :dbcommand:`reIndex`
-   - :dbcommand:`renameCollection` (within a single database.)
-   - :dbcommand:`validate`
+   .. hlist::
+      :columns: 3
+
+      - :dbcommand:`clean`
+      - :dbcommand:`collMod`
+      - :dbcommand:`collStats`
+      - :dbcommand:`compact`
+      - :dbcommand:`convertToCapped`
+      - :dbcommand:`create`
+      - :method:`db.createCollection()`
+      - :dbcommand:`dbStats`
+      - :method:`~db.collection.drop()`
+      - :dbcommand:`dropIndexes`
+      - :method:`~db.collection.ensureIndex()`
+      - :dbcommand:`indexStats`
+      - :dbcommand:`profile`
+      - :dbcommand:`reIndex`
+      - :dbcommand:`renameCollection` [#rename-with-single-database]_
+      - :dbcommand:`validate`
+
+   .. [#rename-with-single-database] :authrole:`dbAdmin` only permits
+      collection renames within a single database.
 
    Furthermore, only :authrole:`dbAdmin` has the ability to read the
    :data:`system.profile <<database>.system.profile>` collection.
@@ -174,56 +196,59 @@ Administrative Roles
    Specifically, users with the :authrole:`clusterAdmin` role have
    access to the following operations:
 
-   - :dbcommand:`addShard`
-   - :dbcommand:`closeAllDatabases`
-   - :dbcommand:`connPoolStats`
-   - :dbcommand:`connPoolSync`
-   - :dbcommand:`_cpuProfilerStart`
-   - :dbcommand:`_cpuProfilerStop`
-   - :dbcommand:`cursorInfo`
-   - :dbcommand:`diagLogging`
-   - :dbcommand:`dropDatabase`
-   - :dbcommand:`enableSharding`
-   - :dbcommand:`flushRouterConfig`
-   - :dbcommand:`fsync`
-   - :method:`db.fsyncUnlock()`
-   - :dbcommand:`getCmdLineOpts`
-   - :dbcommand:`getLog`
-   - :dbcommand:`getParameter`
-   - :dbcommand:`getShardMap`
-   - :dbcommand:`getShardVersion`
-   - :dbcommand:`hostInfo`
-   - :method:`db.currentOp()`
-   - :method:`db.killOp()`
-   - :dbcommand:`listDatabases`
-   - :dbcommand:`listShards`
-   - :dbcommand:`logRotate`
-   - :dbcommand:`moveChunk`
-   - :dbcommand:`movePrimary`
-   - :dbcommand:`netstat`
-   - :dbcommand:`removeShard`
-   - :dbcommand:`repairDatabase`
-   - :dbcommand:`replSetFreeze`
-   - :dbcommand:`replSetGetStatus`
-   - :dbcommand:`replSetInitiate`
-   - :dbcommand:`replSetMaintenance`
-   - :dbcommand:`replSetReconfig`
-   - :dbcommand:`replSetStepDown`
-   - :dbcommand:`replSetSyncFrom`
-   - :dbcommand:`resync`
-   - :dbcommand:`serverStatus`
-   - :dbcommand:`setParameter`
-   - :dbcommand:`setShardVersion`
-   - :dbcommand:`shardCollection`
-   - :dbcommand:`shardingState`
-   - :dbcommand:`shutdown`
-   - :dbcommand:`splitChunk`
-   - :dbcommand:`splitVector`
-   - :dbcommand:`split`
-   - :dbcommand:`top`
-   - :dbcommand:`touch`
-   - :dbcommand:`unsetSharding`
+   .. hlist::
+      :columns: 3
 
+      - :dbcommand:`addShard`
+      - :dbcommand:`closeAllDatabases`
+      - :dbcommand:`connPoolStats`
+      - :dbcommand:`connPoolSync`
+      - :dbcommand:`_cpuProfilerStart`
+      - :dbcommand:`_cpuProfilerStop`
+      - :dbcommand:`cursorInfo`
+      - :dbcommand:`diagLogging`
+      - :dbcommand:`dropDatabase`
+      - :dbcommand:`enableSharding`
+      - :dbcommand:`flushRouterConfig`
+      - :dbcommand:`fsync`
+      - :method:`db.fsyncUnlock()`
+      - :dbcommand:`getCmdLineOpts`
+      - :dbcommand:`getLog`
+      - :dbcommand:`getParameter`
+      - :dbcommand:`getShardMap`
+      - :dbcommand:`getShardVersion`
+      - :dbcommand:`hostInfo`
+      - :method:`db.currentOp()`
+      - :method:`db.killOp()`
+      - :dbcommand:`listDatabases`
+      - :dbcommand:`listShards`
+      - :dbcommand:`logRotate`
+      - :dbcommand:`moveChunk`
+      - :dbcommand:`movePrimary`
+      - :dbcommand:`netstat`
+      - :dbcommand:`removeShard`
+      - :dbcommand:`repairDatabase`
+      - :dbcommand:`replSetFreeze`
+      - :dbcommand:`replSetGetStatus`
+      - :dbcommand:`replSetInitiate`
+      - :dbcommand:`replSetMaintenance`
+      - :dbcommand:`replSetReconfig`
+      - :dbcommand:`replSetStepDown`
+      - :dbcommand:`replSetSyncFrom`
+      - :dbcommand:`resync`
+      - :dbcommand:`serverStatus`
+      - :dbcommand:`setParameter`
+      - :dbcommand:`setShardVersion`
+      - :dbcommand:`shardCollection`
+      - :dbcommand:`shardingState`
+      - :dbcommand:`shutdown`
+      - :dbcommand:`splitChunk`
+      - :dbcommand:`splitVector`
+      - :dbcommand:`split`
+      - :dbcommand:`top`
+      - :dbcommand:`touch`
+      - :dbcommand:`unsetSharding`
+   
 .. _auth-any-database-roles:
 
 Any Database Roles

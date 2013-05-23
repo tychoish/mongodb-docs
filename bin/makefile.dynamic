@@ -60,6 +60,7 @@ $(output)/include-dependencies.json:bin/makefile.dynamic
              sed $(SED_ARGS_REGEX) -e 's%(.txt):(.*)$$%\1", "dep": "\2" }%' \
                                    -e 's%^(source)%{ "target": "\1%' >| $@
 	@echo [build]: $@ generated include dependencies 
+
 $(output)/makefile.dependencies:bin/makecloth/dependencies.py $(output)/include-dependencies.json
 	@$(PYTHONBIN) $< $@ $(output)/include-dependencies.json
 

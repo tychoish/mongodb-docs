@@ -35,7 +35,7 @@ def generate_delegated_interface(builders):
                 build_target = 'delegated-%s-%s-%s' % ( branch, target, sync[0])
                 targets.append(build_target)
 
-                m.target(target=build_target,  block=branch)
+                m.target(target=build_target, block=branch)
 
                 m.job(job=('$(PYTHONBIN) bin/delegated-build --branch %s --target %s %s'
                            % ( branch, target, sync[1])),
