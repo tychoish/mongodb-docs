@@ -726,6 +726,23 @@ with the :option:`--discover` option. In earlier versions of
 :option:`--rowcount`, and would continue to produce output until the
 user terminated the program.
 
+New Default Allocation Strategy
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. versionchanged:: 2.5.5
+
+By default all new collections will have the
+:collmod:`usePowerOf2Sizes` allocation strategy where each record has
+a size, in bytes that is a power of 2.
+
+The new allocation strategy, which was available as an option in
+previous options, uses more storage relative to total document size;
+however, results in lower levels of storage fragmentation over time.
+
+You can use the old allocation straegy by setting:collmod:`usePowerOf2Sizes`
+with :dbcommand:`collMod` on a specific collection or setting
+:parameter:`newCollectionsUsePowerOf2sizes`.
+
 Limit for ``maxConns`` Removed
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
