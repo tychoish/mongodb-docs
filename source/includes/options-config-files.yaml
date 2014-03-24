@@ -22,8 +22,8 @@ type: string
 directive: setting
 inherit:
   name: bind_ip
-  program: _shared
-  file: options-shared.yaml
+  program: mongod
+  file: options-mongod.yaml
 ---
 program: configuration-options
 name: net.maxIncomingConnections
@@ -130,7 +130,7 @@ type: string
 directive: setting
 inherit:
   name: auth
-  program: _mongod
+  program: mongod
   file: options-mongod.yaml
 ---
 program: configuration-options

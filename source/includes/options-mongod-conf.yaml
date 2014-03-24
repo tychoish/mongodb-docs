@@ -1,0 +1,640 @@
+# description: set verbose level
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: systemLog.verbosity
+# program: mongod
+# type: number
+# ---
+description: quieter output
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: quiet
+   program: mongod
+name: systemLog.quiet
+program: mongod
+type: boolean
+---
+description: specify port number - 27017 by default
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: port
+   program: mongod
+name: net.port
+program: mongod
+type: number
+---
+description: comma separated list of ip addresses to listen on - all local ips by
+   default
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: bind_ip
+   program: mongod
+name: net.bindIp
+program: mongod
+type: string
+---
+description: max number of simultaneous connections - 1000000 by default
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: maxConns
+   program: mongod
+name: net.maxIncomingConnections
+program: mongod
+type: number
+---
+description: syslog facility used for monogdb syslog message
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: syslogFacility
+   program: mongod
+name: systemLog.syslogFacility
+program: mongod
+type: string
+---
+description: append to logpath instead of over-writing
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: logappend
+   program: mongod
+name: systemLog.logAppend
+program: mongod
+type: boolean
+---
+description: Desired format for timestamps in log messages. One of ctime, iso8601-utc
+   or iso8601-local
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: timeStampFormat
+   program: mongod
+name: systemLog.timeStampFormat
+program: mongod
+type: string
+---
+description: full path to pidfile (if not set, no pidfile is created)
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: pidfilepath
+   program: mongod
+name: processManagement.pidFilePath
+program: mongod
+type: string
+---
+description: private key for cluster authentication
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: keyFile
+   program: mongod
+name: security.keyFile
+program: mongod
+type: string
+---
+description: Set a configurable parameter
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: setParameter
+   program: mongod
+name: setParameter
+program: mongod
+type: document
+---
+# description: enable http interface
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: net.http.enabled
+# program: mongod
+# type: boolean
+# ---
+# description: port to listen on for http interface
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: net.http.port
+# program: mongod
+# type: boolean
+# ---
+description: Authentication mode used for cluster authentication. Alternatives are
+   (keyFile|sendKeyFile|sendX509|x509)
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: clusterAuthMode
+   program: mongod
+name: security.clusterAuthMode
+program: mongod
+type: string
+# ---
+# description: disable listening on unix sockets
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: net.unixDomainSocket.enabled
+# program: mongod
+# type: boolean
+---
+description: alternative directory for UNIX domain sockets (defaults to /tmp)
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: unixSocketPrefix
+   program: mongod
+name: net.unixDomainSocket.pathPrefix
+program: mongod
+type: string
+---
+description: fork server process
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: fork
+   program: mongod
+name: processManagement.fork
+program: mongod
+type: boolean
+---
+# description: How the database behaves with respect to authentication of clients.  Options
+#    are "optional", which means that a client can connect with or without authentication,
+#    and "required" which means clients must use authentication
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: security.authentication
+# program: mongod
+# type: string
+# ---
+# description: TODO
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: security.authSchemaVersion
+# program: mongod
+# type: string
+# ---
+# description: TODO
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: security.authenticationMechanisms
+# program: mongod
+# type: string
+# ---
+# description: TODO
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: security.enableLocalhostAuthBypass
+# program: mongod
+# type: string
+# ---
+# description: TODO
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: security.supportCompatibilityFormPrivilegeDocuments
+# program: mongod
+# type: string
+# ---
+description: enable IPv6 support (disabled by default)
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: ipv6
+   program: mongod
+name: net.ipv6
+program: mongod
+type: boolean
+---
+description: allow JSONP access via http (has security implications)
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: jsonp
+   program: mongod
+name: net.http.JSONPEnabled
+program: mongod
+type: boolean
+---
+description: turn on simple rest api
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: rest
+   program: mongod
+name: net.http.RESTInterfaceEnabled
+program: mongod
+type: boolean
+---
+description: value of slow for profile and console log
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: slowms
+   program: mongod
+name: operationProfiling.slowOpThresholdMs
+program: mongod
+type: number
+---
+# description: (off/slowOp/all)
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: operationProfiling.mode
+# program: mongod
+# type: number
+# ---
+description: directory for datafiles - defaults to /data/db/
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: dbpath
+   program: mongod
+name: storage.dbPath
+program: mongod
+type: string
+---
+description: each database will be stored in a separate directory
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: directoryperdb
+   program: mongod
+name: storage.directoryPerDB
+program: mongod
+type: boolean
+---
+# description: don't retry any index builds that were interrupted by shutdown
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: storage.indexBuildRetry
+# program: mongod
+# type: boolean
+# ---
+# description: disable data file preallocation - will often hurt performance
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: storage.preallocDataFiles
+# program: mongod
+# type: boolean
+# ---
+description: .ns file size (in MB) for new databases
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: nssize
+   program: mongod
+name: storage.nsSize
+program: mongod
+type: number
+---
+description: number of files allowed per db, implies --quota
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: quotaFiles
+   program: mongod
+name: storage.quota.maxFilesPerDB
+program: mongod
+type: number
+---
+description: use a smaller default file size
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: smallfiles
+   program: mongod
+name: storage.smallFiles
+program: mongod
+type: boolean
+---
+description: seconds between disk syncs (0=never, but not recommended)
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: syncdelay
+   program: mongod
+name: storage.syncPeriodSecs
+program: mongod
+type: number
+---
+description: root directory for repair files - defaults to dbpath
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: repairpath
+   program: mongod
+name: storage.repairPath
+program: mongod
+type: string
+---
+# description: enable journaling
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: storage.journal.enabled
+# program: mongod
+# type: boolean
+# ---
+description: journal diagnostic options
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: journalOptions
+   program: mongod
+name: storage.journal.debugFlags
+program: mongod
+type: number
+---
+description: how often to group/batch commit (ms)
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: journalCommitInterval
+   program: mongod
+name: storage.journal.commitIntervalMs
+program: mongod
+type: number
+---
+description: size to use (in MB) for replication op log. default is 5% of disk space
+   (i.e. large is good)
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: oplogSize
+   program: mongod
+name: replication.oplogSizeMB
+program: mongod
+type: number
+# ---
+# description: arg is <setname>
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: replication.replSetName
+# program: mongod
+# type: string
+---
+description: specify index prefetching behavior (if secondary) [none|_id_only|all]
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: replIndexPrefetch
+   program: mongod
+name: replication.secondaryIndexPrefetch
+program: mongod
+type: string
+---
+# description: 'Choose what role this mongod has in a sharded cluster.  Possible values
+#    are:     "configsvr": Start this node as a config server.  Starts on port 27019
+#    by default.    "shardsvr": Start this node as a shard server.  Starts on port 27018
+#    by default.'
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: sharding.clusterRole
+# program: mongod
+# type: string
+# ---
+description: set the SSL operation mode (disabled|allowSSL|preferSSL|requireSSL)
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: sslMode
+   program: mongod
+name: net.ssl.mode
+program: mongod
+type: string
+---
+description: PEM file for ssl
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: sslPEMKeyFile
+   program: mongod
+name: net.ssl.PEMKeyFile
+program: mongod
+type: string
+---
+description: PEM file password
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: sslPEMKeyPassword
+   program: mongod
+name: net.ssl.PEMKeyPassword
+program: mongod
+type: string
+---
+description: Key file for internal SSL authentication
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: sslClusterFile
+   program: mongod
+name: net.ssl.clusterFile
+program: mongod
+type: string
+---
+description: Internal authentication key file password
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: sslClusterPassword
+   program: mongod
+name: net.ssl.clusterPassword
+program: mongod
+type: string
+---
+description: Certificate Authority file for SSL
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: sslCAFile
+   program: mongod
+name: net.ssl.CAFile
+program: mongod
+type: string
+---
+description: Certificate Revocation List file for SSL
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: sslCRLFile
+   program: mongod
+name: net.ssl.CRLFile
+program: mongod
+type: string
+---
+description: allow client to connect without presenting a certificate
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: sslWeakCertificateValidation
+   program: mongod
+name: net.ssl.weakCertificateValidation
+program: mongod
+type: boolean
+---
+description: allow connections to servers with invalid certificates
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: sslAllowInvalidCertificates
+   program: mongod
+name: net.ssl.allowInvalidCertificates
+program: mongod
+type: boolean
+---
+description: activate FIPS 140-2 mode at startup
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: sslFIPSMode
+   program: mongod
+name: net.ssl.FIPSMode
+program: mongod
+type: boolean
+---
+description: Format of the audit log, if logging to a file.  (BSON/JSON)
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: auditFormat
+   program: mongod
+name: auditLog.format
+program: mongod
+type: string
+---
+description: Destination of audit log output.  (console/syslog/file)
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: auditDestination
+   program: mongod
+name: auditLog.destination
+program: mongod
+type: string
+---
+description: full filespec for audit log file
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: auditPath
+   program: mongod
+name: auditLog.path
+program: mongod
+type: string
+---
+description: filter spec to screen audit records
+directive: setting
+inherit:
+   file: options-mongod.yaml
+   name: auditFilter
+   program: mongod
+name: auditLog.filter
+program: mongod
+type: string
+---
+description: run snmp subagent
+directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: snmp-subagent
+#    program: mongod
+name: snmp.subagent
+program: mongod
+type: boolean
+---
+description: run snmp as master
+directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: snmp-master
+#    program: mongod
+name: snmp.master
+program: mongod
+type: boolean
+# ---
+# description: List of supported authentication mechanisms.  Default is MONGODB-CR and
+#    MONGODB-X509.
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: security.sasl.authenticationMechanisms
+# program: mongod
+# type: list of strings
+# ---
+# description: Fully qualified server domain name
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: security.sasl.hostName
+# program: mongod
+# type: string
+# ---
+# description: Registered name of the service using SASL
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: security.sasl.serviceName
+# program: mongod
+# type: string
+# ---
+# description: Path to Unix domain socket file for saslauthd
+# directive: setting
+# inherit:
+#    file: options-mongod.yaml
+#    name: ''
+#    program: mongod
+# name: security.sasl.saslauthdSocketPath
+# program: mongod
+# type: string
+...
