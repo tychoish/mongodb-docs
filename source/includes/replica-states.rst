@@ -25,10 +25,6 @@
      - Can vote. Members either perform startup self-checks, or transition
        from completing a :doc:`rollback </core/replica-set-rollbacks>` or :doc:`resync </tutorial/resync-replica-set-member>`.
 
-   * - 4
-     - :replstate:`FATAL`
-     - Cannot vote. Has encountered an unrecoverable error.
-
    * - 5
      - :replstate:`STARTUP2`
      - Cannot vote. Forks replication and election threads before
