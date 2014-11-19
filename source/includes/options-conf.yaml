@@ -16,7 +16,7 @@ inherit:
 default: 0
 description: |
   .. versionchanged:: 2.8
- 
+
   Specify the default log message verbosity level for :ref:`components
   <log-messages-components>`. To increase the amount of information
   reported, increase the number.
@@ -25,7 +25,7 @@ description: |
   component's verbosity setting. For example, use the
   :setting:`systemLog.component.accessControl.verbosity` to set the
   verbosity level specifically for :data:`ACCESS` components.
-  
+
   See the ``systemLog.component.<name>.verbosity`` settings for
   specific component verbosity settings.
 
@@ -144,7 +144,7 @@ description: |
   .. versionadded:: 2.8
 
   Specify the log message verbosity level for components related to
-  storage. See :data:`STORAGE` components. 
+  storage. See :data:`STORAGE` components.
 
   The :setting:`systemLog.component.storage.verbosity` level applies to
   jounaling components as well *if*
@@ -161,7 +161,7 @@ description: |
 
   Specify the log message verbosity level for components related to
   journaling. See :data:`JOURNAL` components.
-  
+
   *If* :setting:`systemLog.component.storage.journaling.verbosity` is
   unset, the journaling components have the same verbosity level as the
   storage components; i.e.
@@ -566,13 +566,14 @@ inherit:
   file: options-mongod.yaml
 ---
 program: conf
-name: net.ssl.weakCertificateValidation
+name: net.ssl.allowConnectionsWithoutCertificates
 type: boolean
 directive: setting
 replacement:
   program: ":program:`mongos` or :program:`mongod`"
+  old_name: "``net.ssl.weakCertificateValidation``"
 inherit:
-  name: sslWeakCertificateValidation
+  name: sslAllowConnectionsWithoutCertificates
   program: mongod
   file: options-mongod.yaml
 ---
