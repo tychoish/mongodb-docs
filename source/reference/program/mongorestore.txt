@@ -82,6 +82,7 @@ Options
 .. include:: /includes/option/option-mongorestore-sslCRLFile.rst
 
 .. include:: /includes/option/option-mongorestore-sslAllowInvalidCertificates.rst
+.. include:: /includes/option/option-mongorestore-sslAllowInvalidHosts.rst
 
 .. include:: /includes/option/option-mongorestore-sslFIPSMode.rst
 
@@ -96,12 +97,6 @@ Options
 .. include:: /includes/option/option-mongorestore-gssapiServiceName.rst
 
 .. include:: /includes/option/option-mongorestore-gssapiHostName.rst
-
-.. include:: /includes/option/option-mongorestore-dbpath.rst
-
-.. include:: /includes/option/option-mongorestore-directoryperdb.rst
-
-.. include:: /includes/option/option-mongorestore-journal.rst
 
 .. include:: /includes/option/option-mongorestore-db.rst
 
@@ -127,14 +122,19 @@ Options
 
 .. include:: /includes/option/option-mongorestore-restoreDbUsersAndRoles.rst
 
-.. this does not exist:
-.. .. include:: /includes/option/option-mongorestore-restoreDbUserasAndRoles.rst
-
 .. include:: /includes/option/option-mongorestore-w.rst
+
+.. include:: /includes/option/option-mongorestore-writeConcern.rst
+
+.. include:: /includes/option/option-mongorestore-maintainINsertionOrder.rst
+
+.. include:: /includes/option/option-mongorestore-numParallelCollections.rst
 
 .. _mongorestore-path-option:
 
 .. include:: /includes/option/option-mongorestore-<path>.rst
+
+.. include:: /includes/option/option-mongorestore-dir.rst
 
 Use
 ---

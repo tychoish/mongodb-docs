@@ -45,6 +45,9 @@ your operation.
 Options
 -------
 
+.. |program| replace:: :program:`mongooplog`
+.. include:: /includes/fact-2.8-tools-drop-dbpath-support.rst
+
 .. binary:: mongooplog
 
 .. program:: mongooplog
@@ -75,6 +78,8 @@ Options
 
 .. include:: /includes/option/option-mongooplog-sslAllowInvalidCertificates.rst
 
+.. include:: /includes/option/option-mongooplog-sslAllowInvalidHosts.rst
+
 .. include:: /includes/option/option-mongooplog-sslFIPSMode.rst
 
 .. include:: /includes/option/option-mongooplog-username.rst
@@ -88,12 +93,6 @@ Options
 .. include:: /includes/option/option-mongooplog-gssapiServiceName.rst
 
 .. include:: /includes/option/option-mongooplog-gssapiHostName.rst
-
-.. include:: /includes/option/option-mongooplog-dbpath.rst
-
-.. include:: /includes/option/option-mongooplog-directoryperdb.rst
-
-.. include:: /includes/option/option-mongooplog-journal.rst
 
 .. include:: /includes/option/option-mongooplog-db.rst
 
