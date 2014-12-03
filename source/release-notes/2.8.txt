@@ -39,7 +39,7 @@ To enable WiredTiger, start MongoDB with the following option:
 
 .. code-block:: sh
 
-   mongod --storageEngine wiredtiger
+   mongod --storageEngine wiredTiger
 
 WiredTiger has additional options that you can configure
 at start up time. To configure the storage engine
@@ -75,7 +75,7 @@ You can also configure WiredTiger on a per-collection basis using
 .. code-block:: javascript
 
    db.createCollection("<collectionName>", {storageEngine: {
-                                               wiredtiger: {configString: "<option>=<setting>,<option>=<setting>"}}});
+                                               wiredTiger: {configString: "<option>=<setting>,<option>=<setting>"}}});
 
 All existing server, database, and collection reporting exposes
 statistics from WiredTiger, including: :method:`db.serverStatus()`,
